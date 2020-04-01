@@ -2,6 +2,7 @@ package com.zastupailo.spring.taskmanagement.repository.impl;
 
 import com.zastupailo.spring.taskmanagement.persistence.model.Project;
 import com.zastupailo.spring.taskmanagement.repository.IProjectRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,16 @@ import java.util.Optional;
 public class ProjectRepositoryImpl implements IProjectRepository {
     List<Project> projects = new ArrayList<>();
 
+    @Value("${project.prefix}")
+    private String prefix;
+
+    @Value("${project.sufix}")
+    private Integer sufix;
+
     @PostConstruct
     public void init() {
         System.out.println("INIT " + this.getClass());
+        System.out.println("VALUE " + prefix + " " + sufix);
     }
 
     @PreDestroy
