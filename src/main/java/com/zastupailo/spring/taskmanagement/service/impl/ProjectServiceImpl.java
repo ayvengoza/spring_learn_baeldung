@@ -15,10 +15,8 @@ public class ProjectServiceImpl implements IProjectService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
-    private IProjectRepository projectRepo;
-
     @Autowired
-    private IProjectRepository projectRepo2;
+    private IProjectRepository projectRepo;
 
     public ProjectServiceImpl() {
         LOG.debug("NEW {}", this.getClass());
@@ -34,9 +32,4 @@ public class ProjectServiceImpl implements IProjectService {
         return projectRepo.save(project);
     }
 
-    @Autowired
-    public void setProjectRepo(IProjectRepository projectRepo) {
-        this.projectRepo = projectRepo;
-        LOG.debug("SET {}", projectRepo.getClass());
-    }
 }
