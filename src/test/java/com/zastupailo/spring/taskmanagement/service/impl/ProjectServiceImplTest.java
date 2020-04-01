@@ -6,6 +6,7 @@ import com.zastupailo.spring.taskmanagement.service.IProjectService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 
 @SpringJUnitConfig(value = TestConfig.class)
+@TestPropertySource(locations = "classpath:test.properties")
 class ProjectServiceImplTest {
     @Autowired
     private IProjectService projectService;
