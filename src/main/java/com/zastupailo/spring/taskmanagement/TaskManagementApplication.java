@@ -10,8 +10,7 @@ public class TaskManagementApplication {
 
 	public static void main(String[] args) {
 		applicationContext = SpringApplication.run(TaskManagementApplication.class, args);
-		displayAllBeans();
-		applicationContext.close();
+//		displayAllBeans();
 	}
 
 	public static void displayAllBeans() {
