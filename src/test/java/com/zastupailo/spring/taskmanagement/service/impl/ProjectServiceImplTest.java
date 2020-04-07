@@ -26,7 +26,7 @@ class ProjectServiceImplTest {
 
     @Test
     void save_notNull() {
-        Project project = projectService.save(new Project(1L, "Name", LocalDate.now()));
+        Project project = projectService.save(new Project("Name", LocalDate.now()));
         Assert.assertThat(project, is(notNullValue()));
     }
 }
