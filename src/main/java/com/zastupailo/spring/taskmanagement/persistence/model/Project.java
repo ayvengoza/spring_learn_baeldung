@@ -1,10 +1,9 @@
 package com.zastupailo.spring.taskmanagement.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -14,6 +13,10 @@ public class Project {
     private Long id;
     private String name;
     private LocalDate dateCreated;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private Set<Task> tasks;
 
     public Project() {
 
@@ -49,6 +52,14 @@ public class Project {
 
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override

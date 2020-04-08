@@ -1,12 +1,15 @@
 package com.zastupailo.spring.taskmanagement.repository;
 
 import com.zastupailo.spring.taskmanagement.persistence.model.Project;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
-public interface IProjectRepository extends CrudRepository<Project, Long> {
-    Optional<Project> findById(Long id);
+public interface IProjectRepository extends PagingAndSortingRepository<Project, Long> {
 
-    Project save(Project project);
+    Optional<Project> findByName(String name);
+
+    List<Project> findByDateCreatedBetween(LocalDate start, LocalDate end);
 }
