@@ -2,6 +2,7 @@ package com.zastupailo.spring.taskmanagement.persistence.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class Project {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
-    private Set<Task> tasks;
+    private Set<Task> tasks = new HashSet<>();
 
     public Project() {
 
