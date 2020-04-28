@@ -2,6 +2,7 @@ package com.zastupailo.spring.taskmanagement.web.dto;
 
 import com.zastupailo.spring.taskmanagement.persistence.model.Project;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +10,8 @@ import java.util.stream.Collectors;
 public class ProjectDto {
 
     private Long id;
+
+    @NotBlank
     private String name;
 
     private Set<TaskDto> tasksDtos;
