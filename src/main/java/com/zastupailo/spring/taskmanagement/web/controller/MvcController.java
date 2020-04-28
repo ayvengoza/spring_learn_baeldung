@@ -28,6 +28,6 @@ public class MvcController {
                 .collect(Collectors.toList());
 
         model.addAttribute("projects", dtos);
-        return "main";
+        return "projects";
     }
 }

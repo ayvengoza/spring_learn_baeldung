@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Create Date</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="project : ${projects}">
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.name}"></td>
+        <td>no date</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
