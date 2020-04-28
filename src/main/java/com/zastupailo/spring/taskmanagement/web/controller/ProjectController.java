@@ -26,18 +26,11 @@ public class ProjectController {
 
     @PostMapping
     public void create(@RequestBody ProjectDto projectDto) {
-        Project project = convertDtoToEntity(projectDto);
-        projectService.save(project);
+        projectService.save(projectDto);
     }
 
     private ProjectDto convertEntityToDto(Project project) {
         return new ProjectDto(project);
     }
 
-    private Project convertDtoToEntity(ProjectDto projectDto) {
-        Project project = new Project();
-        project.setName(projectDto.getName());
-        project.setId(projectDto.getId());
-        return project;
-    }
 }

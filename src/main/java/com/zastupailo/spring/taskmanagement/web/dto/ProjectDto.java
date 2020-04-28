@@ -13,6 +13,9 @@ public class ProjectDto {
 
     private Set<TaskDto> tasksDtos;
 
+    public ProjectDto() {
+
+    }
 
     public ProjectDto(Project project) {
         this.id = project.getId();
