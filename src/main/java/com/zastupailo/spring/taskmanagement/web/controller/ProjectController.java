@@ -4,11 +4,14 @@ import com.zastupailo.spring.taskmanagement.persistence.model.Project;
 import com.zastupailo.spring.taskmanagement.service.IProjectService;
 import com.zastupailo.spring.taskmanagement.web.dto.ProjectDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+
 @RestController
-@RequestMapping(value = "/projects")
+@RequestMapping(value = "/api/projects")
 public class ProjectController {
 
     private IProjectService projectService;
@@ -18,9 +21,21 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping(value = "/{id}")
-    public ProjectDto findOne(@PathVariable Long id) {
+    @GetMapping(headers = "accept=application/json", value = "/{id}")
+    public ProjectDto findOneJson(@PathVariable Long id) {
         Project project = projectService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return convertEntityToDto(project);
+    }
+
+    @GetMapping(headers = "accept=application/xml", value = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE })
+    public ProjectDto findOneXml(@PathVariable Long id) {
+        Project project = projectService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return convertEntityToDto(project);
+    }
+
+    @GetMapping(params = "paramKey=paramValue", value = "/{id}")
+    public ProjectDto findOneParamFilter(@PathVariable Long id) {
+        Project project = new Project("Param project", LocalDate.now());
         return convertEntityToDto(project);
     }
 
