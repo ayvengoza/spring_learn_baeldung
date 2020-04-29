@@ -15,4 +15,6 @@ public interface IProjectService {
     Project save(ProjectDto projectDto);
 
     List<Project> findAll();
+
+    void delete(Long id);
 }

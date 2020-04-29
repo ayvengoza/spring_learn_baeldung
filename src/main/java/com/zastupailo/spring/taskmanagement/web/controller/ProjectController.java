@@ -23,7 +23,7 @@ public class ProjectController {
 
     @GetMapping(headers = "accept=application/json", value = "/{id}")
     public ProjectDto findOneJson(@PathVariable Long id) {
-        Project project = projectService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Project project = projectService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project Not Found"));
         return convertEntityToDto(project);
     }
 
@@ -42,6 +42,12 @@ public class ProjectController {
     @PostMapping
     public void create(@RequestBody ProjectDto projectDto) {
         projectService.save(projectDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProject(@PathVariable("id") Long id) {
+        projectService.delete(id);
     }
 
     private ProjectDto convertEntityToDto(Project project) {

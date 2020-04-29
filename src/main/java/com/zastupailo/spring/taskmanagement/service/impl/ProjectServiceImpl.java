@@ -48,6 +48,11 @@ public class ProjectServiceImpl implements IProjectService {
 
     }
 
+    @Override
+    public void delete(Long id) {
+        projectRepo.deleteById(id);
+    }
+
     private Project convertDtoToEntity(ProjectDto projectDto) {
         Project project = new Project();
         project.setName(projectDto.getName());
