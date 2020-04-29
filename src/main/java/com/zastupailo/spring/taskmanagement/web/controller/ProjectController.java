@@ -1,8 +1,11 @@
 package com.zastupailo.spring.taskmanagement.web.controller;
 
+import com.zastupailo.spring.taskmanagement.events.ProjectCreatedEvent;
 import com.zastupailo.spring.taskmanagement.persistence.model.Project;
 import com.zastupailo.spring.taskmanagement.service.IProjectService;
 import com.zastupailo.spring.taskmanagement.web.dto.ProjectDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,9 @@ import java.time.LocalDate;
 public class ProjectController {
 
     private IProjectService projectService;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     public ProjectController(IProjectService projectService) {
         super();
@@ -41,7 +47,8 @@ public class ProjectController {
 
     @PostMapping
     public void create(@RequestBody ProjectDto projectDto) {
-        projectService.save(projectDto);
+        Project save = projectService.save(projectDto);
+        applicationEventPublisher.publishEvent(new ProjectCreatedEvent(save.getId()));
     }
 
     @DeleteMapping("/{id}")
