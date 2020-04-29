@@ -23,8 +23,20 @@ public class MvcController {
     @Autowired
     private IProjectService projectService;
 
-    @GetMapping("free_projects")
-    public String projects(Model model) {
+    @GetMapping("ms_projects")
+    public String msProjects(Model model) {
+        List<Project> allProjects = projectService.findAll();
+        List<ProjectDto> dtos = allProjects
+                .stream()
+                .map(project -> new ProjectDto(project))
+                .collect(Collectors.toList());
+
+        model.addAttribute("projects", dtos);
+        return "ms_projects";
+    }
+
+    @GetMapping("fr_projects")
+    public String frProjects(Model model) {
         List<Project> allProjects = projectService.findAll();
         List<ProjectDto> dtos = allProjects
                 .stream()
